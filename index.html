@@ -17,7 +17,6 @@
     background-color: #f7f9f8;
   }
 
-  /* ▼ 全体 2カラムレイアウト ▼ */
   .container {
     max-width: 1200px;
     margin: 60px auto;
@@ -29,18 +28,13 @@
     box-shadow: 0 0 16px rgba(0,0,0,0.1);
   }
 
-  /* 左側テキスト */
-  .left-box {
-    flex: 1;
-  }
-
+  .left-box { flex: 1; }
   .left-box h1 {
     font-size: 26px;
     font-weight: 900;
     margin-bottom: 16px;
     color: #1a2934;
   }
-
   .left-box p {
     font-size: 16px;
     line-height: 1.8;
@@ -48,28 +42,17 @@
     margin-bottom: 20px;
   }
 
-  /* 右側フォーム */
   form {
     flex: 1;
     display: flex;
     flex-direction: column;
   }
 
-  .form-group {
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  label {
-    font-weight: 600;
-    margin-bottom: 6px;
-    color: #374151;
-  }
+  .form-group { margin-bottom: 20px; display: flex; flex-direction: column; }
+  label { font-weight: 600; margin-bottom: 6px; color: #374151; }
 
   input[type="text"],
   input[type="date"],
-  input[type="time"],
   textarea,
   select {
     padding: 10px 12px;
@@ -79,16 +62,12 @@
     font-family: 'Noto Sans JP', sans-serif;
   }
 
-  textarea {
-    min-height: 90px;
-  }
+  textarea { min-height: 90px; }
 
-  /* ▼ 横並び（姓＋名・日付＋時間）共通 ▼ */
   .row-2col {
     display: flex;
     gap: 12px;
   }
-
   .row-2col .sub-group {
     flex: 1;
     display: flex;
@@ -106,17 +85,10 @@
     font-size: 16px;
     cursor: pointer;
   }
+  button.submit-btn:hover { background-color: #3b82f6; }
 
-  button.submit-btn:hover {
-    background-color: #3b82f6;
-  }
-
-  /* ▼ スマホ対応 ▼ */
   @media (max-width: 900px) {
-    .container {
-      flex-direction: column;
-      padding: 30px 20px;
-    }
+    .container { flex-direction: column; padding: 30px 20px; }
   }
 </style>
 </head>
@@ -125,7 +97,6 @@
 
 <div class="container">
 
-  <!-- ▼ 左カラム（説明） ▼ -->
   <div class="left-box">
     <h1>SFDC銀行 コールバック予約</h1>
     <p>
@@ -133,40 +104,35 @@
       お電話が繋がりにくい場合は、こちらのフォームから入力し、<br>
       コールバックのご予約をお願いします。
     </p>
-
     <p>
       ご入力いただいた内容をもとに、担当者より折り返しご連絡いたします。<br>
       お急ぎの場合は、お電話でのご連絡も併せてご利用ください。
     </p>
   </div>
 
-  <!-- ▼ 右カラム（フォーム） ▼ -->
   <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="POST">
 
     <input type="hidden" name="orgid" value="00DgL00000CNPTV" />
     <input type="hidden" name="retURL" value="https://koreajjoon-max.github.io/sample-page/thanks.html" />
 
-    <!-- お名前（姓＋名） -->
     <div class="form-group">
       <label>お名前</label>
       <div class="row-2col">
-
         <div class="sub-group">
           <label for="lastName">姓</label>
           <input type="text" id="lastName" name="lastName" placeholder="山田" required />
         </div>
-
         <div class="sub-group">
           <label for="firstName">名</label>
           <input type="text" id="firstName" name="firstName" placeholder="太郎" required />
         </div>
-
       </div>
     </div>
 
+    <!-- ★ 会社名 → メールアドレスに変更 -->
     <div class="form-group">
-      <label>会社名</label>
-      <input type="text" name="company" placeholder="会社名をご入力ください" />
+      <label for="email">メールアドレス</label>
+      <input type="text" id="email" name="email" placeholder="example@example.com" required />
     </div>
 
     <div class="form-group">
@@ -174,13 +140,17 @@
       <input type="text" id="phone" name="phone" placeholder="090-1234-5678" required />
     </div>
 
+    <!-- ★ 問い合わせ内容種別：AAA,BBB,CCC → 指定の選択肢へ変更 -->
     <div class="form-group">
       <label for="category">問い合わせ内容種別</label>
       <select id="category" name="category" required>
         <option value="">選択してください</option>
-        <option value="AAA">AAA</option>
-        <option value="BBB">BBB</option>
-        <option value="CCC">CCC</option>
+        <option value="各種お手続き">各種お手続き</option>
+        <option value="ATM・店舗">ATM・店舗</option>
+        <option value="口座開設">口座開設</option>
+        <option value="通帳・キャッシュカード">通帳・キャッシュカード</option>
+        <option value="ネットバンキング（S.O.D）">ネットバンキング（S.O.D）</option>
+        <option value="住宅ローン">住宅ローン</option>
       </select>
     </div>
 
@@ -189,14 +159,21 @@
       <label>希望日時</label>
       <div class="row-2col">
 
+        <!-- 日付 -->
         <div class="sub-group">
           <label for="date">日付</label>
           <input type="date" id="date" name="date" required />
         </div>
 
+        <!-- ★ 時間：input type=time → セレクト方式へ変更 -->
         <div class="sub-group">
           <label for="time">時間</label>
-          <input type="time" id="time" name="time" required />
+          <select id="time" name="time" required>
+            <option value="">選択してください</option>
+            <option value="9:00〜10:00">9:00〜10:00</option>
+            <option value="10:00〜11:00">10:00〜11:00</option>
+            <option value="11:00〜12:00">11:00〜12:00</option>
+          </select>
         </div>
 
       </div>
