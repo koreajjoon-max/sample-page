@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>お問い合わせ・資料請求フォーム</title>
+<title>コールバック予約フォーム</title>
 <style>
   body {
     font-family: 'Noto Sans JP', sans-serif;
@@ -102,25 +102,85 @@
   <input type="hidden" name="orgid" value="00DgL00000CNPTV" />
   <input type="hidden" name="retURL" value="https://koreajjoon-max.github.io/sample-page/thanks.html" />
 
-  <h1>お問い合わせ・資料請求</h1>
+  <h1>コールバック予約フォーム</h1>
 
   <div class="form-group">
-    <label for="name">お名前</label>
-    <input type="text" id="name" name="name" placeholder="山田 太郎" required />
+    <label>お名前</label>
+    <div class="row-2col">
+
+      <div class="sub-group">
+        <label for="lastName">姓</label>
+        <input type="text" id="lastName" name="lastName" placeholder="山田" required />
+      </div>
+
+      <div class="sub-group">
+        <label for="firstName">名</label>
+        <input type="text" id="firstName" name="firstName" placeholder="太郎" required />
+      </div>
+
+    </div>
   </div>
 
+  <div class="form-group">
+    <label for="name">会社名</label>
+    <input type="text" id="companyname" name="name" placeholder="XXXX会社" required />
+  </div>
+
+  <div class="form-group">
+    <label for="name">役職</label>
+    <input type="text" id="position" name="name" placeholder="一般社員" required />
+  </div>
+
+  <div class="form-group">
+    <label for="name">メール</label>
+    <input type="text" id="emailaddress" name="name" placeholder="" required />
+  </div>
+  
   <div class="form-group">
     <label for="phone">電話番号</label>
     <input type="text" id="phone" name="phone" placeholder="090-1234-5678" required />
   </div>
 
   <div class="form-group">
-    <label for="date">希望日時</label>
-    <input type="datetime-local" id="date" name="subject" required />
+  　<label>第１希望日</label>
+    <div class="date-time-row">
+      <div class="sub-group">
+        <label for="date">日付</label>
+        <input type="date" id="date1" name="date1" required />
+      </div>
+      <div class="sub-group">
+        <label for="time">時間</label>
+        <input type="time" id="time1" name="time1" required />
+      </div>
+    </div>
+  </div>
+
+    <div class="form-group">
+    <label>第２希望日</label>
+    <div class="date-time-row">
+      <div class="sub-group">
+        <label for="date">日付</label>
+        <input type="date" id="date2" name="date2" required />
+      </div>
+      <div class="sub-group">
+        <label for="time">時間</label>
+        <input type="time" id="time2" name="time2" required />
+      </div>
+    </div>
   </div>
 
   <div class="form-group">
-    <label for="message">お問い合わせ内容</label>
+  <label for="category">問い合わせ内容種別</label>
+  <select id="category" name="category">
+    <option value="">選択してください</option>
+    <option value="AAA">AAA</option>
+    <option value="BBB">BBB</option>
+    <option value="CCC">CCC</option>
+  </select>
+</div>
+
+  <div class="form-group">
+    <label for="message">お問い合わせ詳細内容</label>
     <textarea id="message" name="description" placeholder="ご相談内容を入力してください..." required></textarea>
   </div>
 
