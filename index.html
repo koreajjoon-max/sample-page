@@ -127,9 +127,9 @@
 
   <!-- ▼ 左カラム（説明） ▼ -->
   <div class="left-box">
-    <h1>SFDC銀行 コールバック予約</h1>
+    <h1>コールバック予約</h1>
     <p>
-      SFDC銀行のコールバックサービスでございます。<br>
+      SFDC銀行のコールバック予約サービスでございます。<br>
       お電話が繋がりにくい場合は、こちらのフォームから入力し、<br>
       コールバックのご予約をお願いします。
     </p>
@@ -148,7 +148,7 @@
 
     <!-- お名前（姓＋名） -->
     <div class="form-group">
-      <label>お名前</label>
+      <label>コールバック予約フォーム</label>
       <div class="row-2col">
 
         <div class="sub-group">
@@ -165,26 +165,16 @@
     </div>
 
     <div class="form-group">
-      <label>会社名</label>
-      <input type="text" name="company" placeholder="会社名をご入力ください" />
-    </div>
-
-    <div class="form-group">
       <label for="phone">電話番号</label>
       <input type="text" id="phone" name="phone" placeholder="090-1234-5678" required />
     </div>
 
     <div class="form-group">
-      <label for="category">問い合わせ内容種別</label>
-      <select id="category" name="category" required>
-        <option value="">選択してください</option>
-        <option value="AAA">AAA</option>
-        <option value="BBB">BBB</option>
-        <option value="CCC">CCC</option>
-      </select>
+      <label>メール</label>
+      <input type="text" name="email" placeholder="メールアドレスをご入力ください" />
     </div>
 
-    <!-- 希望日時（日付＋時間） -->
+    <!-- 第１希望日時（日付＋時間） -->
     <div class="form-group">
       <label>希望日時</label>
       <div class="row-2col">
@@ -195,11 +185,34 @@
         </div>
 
         <div class="sub-group">
-          <label for="time">時間</label>
+          <label for="category">時間</label>
+          <select id="category" name="category" required>
+            <option value="">選択してください</option>
+            <option value="9:00〜10:00">timeAAA</option>
+            <option value="10:00〜11:00">timeBBB</option>
+            <option value="11:00〜12:00">timeCCC</option>
+            <option value="12:00〜13:00">timeDDD</option>
+            <option value="13:00〜14:00">timeEEE</option>
+            <option value="14:00〜15:00">timeFFF</option>
+            <option value="15:00〜16:00">timeGGG</option>
+            <option value="16:00〜17:00">timeHHH</option>
           <input type="time" id="time" name="time" required />
         </div>
 
       </div>
+    </div>
+
+    <div class="form-group">
+      <label for="category">問い合わせ内容種別</label>
+      <select id="category" name="category" required>
+        <option value="">選択してください</option>
+        <option value="各種お手続き">AAA</option>
+        <option value="ATM・店舗">BBB</option>
+        <option value="口座開設">CCC</option>
+        <option value="通帳・キャッシュカード">DDD</option>
+        <option value="ネットバンキング（S.O.D）">EEE</option>
+        <option value="住宅ローン">FFF</option>
+      </select>
     </div>
 
     <div class="form-group">
