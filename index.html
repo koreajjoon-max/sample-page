@@ -1,30 +1,190 @@
-<form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="POST">
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>お問い合わせ・資料請求フォーム</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
 
-    <input type="hidden" name="orgid" value="00DgL00000CNPTV">
-    
-    <input type="hidden" name="retURL" value="https://koreajjoon-max.github.io/sample-page/thanks.html">
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    margin: 0; padding: 0;
+    background: #f7f9f8;
+    color: #222;
+  }
 
+  .container {
+    max-width: 1100px;
+    margin: 40px auto;
+    display: flex;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #ccc;
+    overflow: hidden;
+  }
 
-    <div class="form-group">
-        <label>お名前</label>
-        <input type="text" id="name" name="name" placeholder="山田 太郎">
-    </div>
+  .left-panel {
+    flex: 1 1 45%;
+    background: #fafdfa;
+    padding: 48px 40px;
+    box-sizing: border-box;
+    color: #1a2934;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
-    <div class="form-group">
-        <label>電話番号</label>
-        <input type="text" id="phone" name="phone" placeholder="090-1234-5678">
-    </div>
+  .left-panel h1 {
+    font-weight: 900;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #1a2934;
+  }
 
-    <div class="form-group">
-        <label>希望日時</label>
-        <input type="datetime-local" id="date" name="subject">
-    </div>
+  .left-panel p {
+    line-height: 1.6;
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
 
-    <div class="form-group">
-        <label>お問い合わせ内容</label>
-        <textarea id="message" name="description" placeholder="ご相談内容を入力してください..."></textarea>
-    </div>
+  .left-panel p:last-of-type {
+    margin-top: 30px;
+    font-weight: 700;
+  }
 
-    <button type="submit" class="submit-btn">送信する</button>
-    
-</form>
+  .left-panel .image-wrapper {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .left-panel img {
+    max-width: 220px;
+    height: auto;
+    user-select: none;
+  }
+
+  .right-panel {
+    flex: 1 1 55%;
+    padding: 40px 48px;
+    box-sizing: border-box;
+    color: #374151;
+  }
+
+  form {
+    max-width: 100%;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  label {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #374151;
+  }
+
+  input[type="text"],
+  input[type="datetime-local"],
+  textarea {
+    font-size: 14px;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    outline-offset: 2px;
+    outline-color: #2563eb;
+    transition: border-color 0.2s ease-in-out;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  input[type="text"]:focus,
+  input[type="datetime-local"]:focus,
+  textarea:focus {
+    border-color: #2563eb;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 90px;
+  }
+
+  button.submit-btn {
+    margin-top: 24px;
+    width: 100%;
+    background-color: #1e293b;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 14px 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  button.submit-btn:hover {
+    background-color: #3b82f6;
+  }
+
+  @media(max-width: 900px) {
+    .container {
+      flex-direction: column;
+      margin: 20px;
+    }
+
+    .left-panel, .right-panel {
+      flex: unset;
+      width: 100%;
+      padding: 24px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <section class="left-panel">
+      <h1>お問い合わせ・資料請求</h1>
+      <p>当行のサービスにご興味をお持ちいただきありがとうございます。</p>
+      <p>このフォームから、各種サービスに関するご相談、資料請求、または個別のご説明のお申し込みが可能です。</p>
+      <p>お客様の状況に合わせて、最適なサポートを提供いたします。お気軽にお問い合わせください。</p>
+      <p>受付時間：平日 9:00 - 17:00</p>
+      <div class="image-wrapper">
+        <img src="/mnt/data/16b832dd-ccfb-452e-85f6-1367b097d22f.png" alt="かわいいレッサーパンダのイラスト" />
+      </div>
+    </section>
+
+    <section class="right-panel">
+      <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="POST">
+        <input type="hidden" name="orgid" value="00DgL00000CNPTV" />
+        <input type="hidden" name="retURL" value="https://koreajjoon-max.github.io/sample-page/thanks.html" />
+
+        <div class="form-group">
+          <label for="name">お名前</label>
+          <input type="text" id="name" name="name" placeholder="山田 太郎" required />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">電話番号</label>
+          <input type="text" id="phone" name="phone" placeholder="090-1234-5678" required />
+        </div>
+
+        <div class="form-group">
+          <label for="date">希望日時</label>
+          <input type="datetime-local" id="date" name="subject" required />
+        </div>
+
+        <div class="form-group">
+          <label for="message">お問い合わせ内容</label>
+          <textarea id="message" name="description" placeholder="ご相談内容を入力してください..." required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">送信する</button>
+      </form>
+    </section>
+  </div>
+</body>
+</html>
