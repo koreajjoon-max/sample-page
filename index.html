@@ -4,35 +4,55 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>コールバック予約フォーム</title>
+
 <style>
   body {
     font-family: 'Noto Sans JP', sans-serif;
-    margin: 0; padding: 0;
+    margin: 0;
+    padding: 0;
     background-image: url('./callback_background.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
     background-color: #f7f9f8;
-    color: #222;
   }
 
-  form {
-    max-width: 600px;
+  /* ▼ 全体 2カラムレイアウト ▼ */
+  .container {
+    max-width: 1200px;
     margin: 60px auto;
+    display: flex;
+    gap: 40px;
     background: rgba(255, 255, 255, 0.95);
-    padding: 40px 30px;
+    padding: 40px 50px;
     border-radius: 12px;
     box-shadow: 0 0 16px rgba(0,0,0,0.1);
-    font-size: 15px;
-    color: #374151;
   }
 
-  form h1 {
-    margin-bottom: 24px;
+  /* 左側テキスト */
+  .left-box {
+    flex: 1;
+  }
+
+  .left-box h1 {
+    font-size: 26px;
     font-weight: 900;
-    font-size: 24px;
+    margin-bottom: 16px;
     color: #1a2934;
+  }
+
+  .left-box p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #374151;
+    margin-bottom: 20px;
+  }
+
+  /* 右側フォーム */
+  form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   .form-group {
@@ -48,144 +68,150 @@
   }
 
   input[type="text"],
-  input[type="datetime-local"],
-  textarea {
+  input[type="date"],
+  input[type="time"],
+  textarea,
+  select {
     padding: 10px 12px;
     font-size: 14px;
     border: 1px solid #cbd5e1;
     border-radius: 6px;
-    outline-offset: 2px;
-    outline-color: #2563eb;
-    transition: border-color 0.2s ease-in-out;
     font-family: 'Noto Sans JP', sans-serif;
-  }
-
-  input[type="text"]:focus,
-  input[type="datetime-local"]:focus,
-  textarea:focus {
-    border-color: #2563eb;
   }
 
   textarea {
     min-height: 90px;
-    resize: vertical;
+  }
+
+  /* ▼ 横並び（姓＋名・日付＋時間）共通 ▼ */
+  .row-2col {
+    display: flex;
+    gap: 12px;
+  }
+
+  .row-2col .sub-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   button.submit-btn {
     width: 100%;
     padding: 14px 0;
     background-color: #1e293b;
-    color: white;
+    color: #fff;
     font-weight: 700;
-    font-size: 16px;
     border: none;
     border-radius: 8px;
+    font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
   }
 
   button.submit-btn:hover {
     background-color: #3b82f6;
   }
 
-  @media (max-width: 640px) {
-    form {
-      margin: 40px 20px;
+  /* ▼ スマホ対応 ▼ */
+  @media (max-width: 900px) {
+    .container {
+      flex-direction: column;
       padding: 30px 20px;
     }
   }
 </style>
 </head>
+
 <body>
 
-<form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="POST">
-  <input type="hidden" name="orgid" value="00DgL00000CNPTV" />
-  <input type="hidden" name="retURL" value="https://koreajjoon-max.github.io/sample-page/thanks.html" />
+<div class="container">
 
-  <h1>コールバック予約フォーム</h1>
+  <!-- ▼ 左カラム（説明） ▼ -->
+  <div class="left-box">
+    <h1>SFDC銀行 コールバック予約</h1>
+    <p>
+      SFDC銀行のコールバックサービスでございます。<br>
+      お電話が繋がりにくい場合は、こちらのフォームから入力し、<br>
+      コールバックのご予約をお願いします。
+    </p>
 
-  <div class="form-group">
-    <label>お名前</label>
-    <div class="row-2col">
-
-      <div class="sub-group">
-        <label for="lastName">姓</label>
-        <input type="text" id="lastName" name="lastName" placeholder="山田" required />
-      </div>
-
-      <div class="sub-group">
-        <label for="firstName">名</label>
-        <input type="text" id="firstName" name="firstName" placeholder="太郎" required />
-      </div>
-
-    </div>
+    <p>
+      ご入力いただいた内容をもとに、担当者より折り返しご連絡いたします。<br>
+      お急ぎの場合は、お電話でのご連絡も併せてご利用ください。
+    </p>
   </div>
 
-  <div class="form-group">
-    <label for="name">会社名</label>
-    <input type="text" id="companyname" name="name" placeholder="XXXX会社" required />
-  </div>
+  <!-- ▼ 右カラム（フォーム） ▼ -->
+  <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="POST">
 
-  <div class="form-group">
-    <label for="name">役職</label>
-    <input type="text" id="position" name="name" placeholder="一般社員" required />
-  </div>
+    <input type="hidden" name="orgid" value="00DgL00000CNPTV" />
+    <input type="hidden" name="retURL" value="https://koreajjoon-max.github.io/sample-page/thanks.html" />
 
-  <div class="form-group">
-    <label for="name">メール</label>
-    <input type="text" id="emailaddress" name="name" placeholder="" required />
-  </div>
-  
-  <div class="form-group">
-    <label for="phone">電話番号</label>
-    <input type="text" id="phone" name="phone" placeholder="090-1234-5678" required />
-  </div>
+    <!-- お名前（姓＋名） -->
+    <div class="form-group">
+      <label>お名前</label>
+      <div class="row-2col">
 
-  <div class="form-group">
-  　<label>第１希望日</label>
-    <div class="date-time-row">
-      <div class="sub-group">
-        <label for="date">日付</label>
-        <input type="date" id="date1" name="date1" required />
-      </div>
-      <div class="sub-group">
-        <label for="time">時間</label>
-        <input type="time" id="time1" name="time1" required />
+        <div class="sub-group">
+          <label for="lastName">姓</label>
+          <input type="text" id="lastName" name="lastName" placeholder="山田" required />
+        </div>
+
+        <div class="sub-group">
+          <label for="firstName">名</label>
+          <input type="text" id="firstName" name="firstName" placeholder="太郎" required />
+        </div>
+
       </div>
     </div>
-  </div>
 
     <div class="form-group">
-    <label>第２希望日</label>
-    <div class="date-time-row">
-      <div class="sub-group">
-        <label for="date">日付</label>
-        <input type="date" id="date2" name="date2" required />
-      </div>
-      <div class="sub-group">
-        <label for="time">時間</label>
-        <input type="time" id="time2" name="time2" required />
+      <label>会社名</label>
+      <input type="text" name="company" placeholder="会社名をご入力ください" />
+    </div>
+
+    <div class="form-group">
+      <label for="phone">電話番号</label>
+      <input type="text" id="phone" name="phone" placeholder="090-1234-5678" required />
+    </div>
+
+    <div class="form-group">
+      <label for="category">問い合わせ内容種別</label>
+      <select id="category" name="category" required>
+        <option value="">選択してください</option>
+        <option value="AAA">AAA</option>
+        <option value="BBB">BBB</option>
+        <option value="CCC">CCC</option>
+      </select>
+    </div>
+
+    <!-- 希望日時（日付＋時間） -->
+    <div class="form-group">
+      <label>希望日時</label>
+      <div class="row-2col">
+
+        <div class="sub-group">
+          <label for="date">日付</label>
+          <input type="date" id="date" name="date" required />
+        </div>
+
+        <div class="sub-group">
+          <label for="time">時間</label>
+          <input type="time" id="time" name="time" required />
+        </div>
+
       </div>
     </div>
-  </div>
 
-  <div class="form-group">
-  <label for="category">問い合わせ内容種別</label>
-  <select id="category" name="category">
-    <option value="">選択してください</option>
-    <option value="AAA">AAA</option>
-    <option value="BBB">BBB</option>
-    <option value="CCC">CCC</option>
-  </select>
+    <div class="form-group">
+      <label for="message">お問い合わせ内容</label>
+      <textarea id="message" name="description" placeholder="ご相談内容を入力してください..." required></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn">送信する</button>
+
+  </form>
+
 </div>
-
-  <div class="form-group">
-    <label for="message">お問い合わせ詳細内容</label>
-    <textarea id="message" name="description" placeholder="ご相談内容を入力してください..." required></textarea>
-  </div>
-
-  <button type="submit" class="submit-btn">送信する</button>
-</form>
 
 </body>
 </html>
