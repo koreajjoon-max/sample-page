@@ -17,49 +17,42 @@
     background-color: #f7f9f8;
   }
 
-  /* ▼ 中央に白い大きなカード枠 ▼ */
+  /* ▼ 全体 2カラムレイアウト ▼ */
   .container {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 60px auto;
     display: flex;
-    gap: 50px;
-    background: rgba(255, 255, 255, 0.96);
-    padding: 50px 60px;
-    border-radius: 18px;
-    box-shadow: 0 0 24px rgba(0,0,0,0.15);
+    gap: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 0 16px rgba(0,0,0,0.1);
   }
 
-  /* 左側（説明） */
+  /* 左側テキスト */
   .left-box {
-    flex: 0.9;
+    flex: 1;
   }
 
   .left-box h1 {
-    font-size: 30px;
+    font-size: 26px;
     font-weight: 900;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     color: #1a2934;
   }
 
   .left-box p {
-    font-size: 15px;
-    line-height: 1.9;
+    font-size: 16px;
+    line-height: 1.8;
     color: #374151;
     margin-bottom: 20px;
   }
 
-  /* 右側（フォーム） */
+  /* 右側フォーム */
   form {
-    flex: 1.1;
+    flex: 1;
     display: flex;
     flex-direction: column;
-  }
-
-  .form-title {
-    font-size: 20px;
-    margin-bottom: 20px;
-    font-weight: 800;
-    color: #1a2934;
   }
 
   .form-group {
@@ -76,23 +69,24 @@
 
   input[type="text"],
   input[type="date"],
+  input[type="time"],
   textarea,
   select {
-    padding: 12px 14px;
-    font-size: 15px;
+    padding: 10px 12px;
+    font-size: 14px;
     border: 1px solid #cbd5e1;
-    border-radius: 8px;
+    border-radius: 6px;
     font-family: 'Noto Sans JP', sans-serif;
   }
 
   textarea {
-    min-height: 100px;
+    min-height: 90px;
   }
 
-  /* 横並び（姓＋名・日付＋時間） */
+  /* ▼ 横並び（姓＋名・日付＋時間）共通 ▼ */
   .row-2col {
     display: flex;
-    gap: 15px;
+    gap: 12px;
   }
 
   .row-2col .sub-group {
@@ -103,14 +97,13 @@
 
   button.submit-btn {
     width: 100%;
-    padding: 16px 0;
+    padding: 14px 0;
     background-color: #1e293b;
     color: #fff;
     font-weight: 700;
     border: none;
     border-radius: 8px;
     font-size: 16px;
-    margin-top: 10px;
     cursor: pointer;
   }
 
@@ -134,14 +127,91 @@
 
   <!-- ▼ 左カラム（説明） ▼ -->
   <div class="left-box">
-    <h1>コールバック予約</h1>
-
+    <h1>SFDC銀行 コールバック予約</h1>
     <p>
-      SFDC銀行のコールバック予約サービスでございます。<br>
+      SFDC銀行のコールバックサービスでございます。<br>
       お電話が繋がりにくい場合は、こちらのフォームから入力し、<br>
       コールバックのご予約をお願いします。
     </p>
 
     <p>
       ご入力いただいた内容をもとに、担当者より折り返しご連絡いたします。<br>
-      お
+      お急ぎの場合は、お電話でのご連絡も併せてご利用ください。
+    </p>
+  </div>
+
+  <!-- ▼ 右カラム（フォーム） ▼ -->
+  <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="POST">
+
+    <input type="hidden" name="orgid" value="00DgL00000CNPTV" />
+    <input type="hidden" name="retURL" value="https://koreajjoon-max.github.io/sample-page/thanks.html" />
+
+    <!-- お名前（姓＋名） -->
+    <div class="form-group">
+      <label>お名前</label>
+      <div class="row-2col">
+
+        <div class="sub-group">
+          <label for="lastName">姓</label>
+          <input type="text" id="lastName" name="lastName" placeholder="山田" required />
+        </div>
+
+        <div class="sub-group">
+          <label for="firstName">名</label>
+          <input type="text" id="firstName" name="firstName" placeholder="太郎" required />
+        </div>
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>会社名</label>
+      <input type="text" name="company" placeholder="会社名をご入力ください" />
+    </div>
+
+    <div class="form-group">
+      <label for="phone">電話番号</label>
+      <input type="text" id="phone" name="phone" placeholder="090-1234-5678" required />
+    </div>
+
+    <div class="form-group">
+      <label for="category">問い合わせ内容種別</label>
+      <select id="category" name="category" required>
+        <option value="">選択してください</option>
+        <option value="AAA">AAA</option>
+        <option value="BBB">BBB</option>
+        <option value="CCC">CCC</option>
+      </select>
+    </div>
+
+    <!-- 希望日時（日付＋時間） -->
+    <div class="form-group">
+      <label>希望日時</label>
+      <div class="row-2col">
+
+        <div class="sub-group">
+          <label for="date">日付</label>
+          <input type="date" id="date" name="date" required />
+        </div>
+
+        <div class="sub-group">
+          <label for="time">時間</label>
+          <input type="time" id="time" name="time" required />
+        </div>
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="message">お問い合わせ内容</label>
+      <textarea id="message" name="description" placeholder="ご相談内容を入力してください..." required></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn">送信する</button>
+
+  </form>
+
+</div>
+
+</body>
+</html>
